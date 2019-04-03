@@ -1,4 +1,4 @@
-
+import re
 
 
 def merge_sort(list_ints):
@@ -26,25 +26,48 @@ def merge(half_1, half_2):
 
 		else:
 			if half_1[counter_1] < half_2[counter_2]:
-				print("first")
+				#print("first")
 				new_list.append(half_1[counter_1])
 				counter_1+=1
 			elif half_1[counter_1] >= half_2[counter_2]:
-				print("second")
+				#print("second")
 				new_list.append(half_2[counter_2])
 				counter_2+=1
 	return new_list
-	
 
-def split(list_ints):
-	print(list_ints[:len(list_ints)//2])
-	print(list_ints[len(list_ints)//2:])
+
+def read_from_file(fname):
+	content = []
+	with open(fname) as f:
+		content = f.readlines()
+		
+	for x in range(0,len(content)):
+		content[x] = re.sub('\r','',content[x])
+		content[x] = re.sub('\n','',content[x])
+		content[x] = content[x].split()
+		content[x] = list(map(int, content[x]))
+	#print(content)
+	return content	
+
 	
 def main():
 	
-	list_ints = [3,2,2,1]
+	fname = "data.txt"
+	fwrite = "merge.txt"
 	
-	sorted_list = merge_sort(list_ints)
-	print(sorted_list)
+	lists_to_sort = []
+	
+	
+	lists_to_sort = read_from_file(fname)
+	
+	
+	f = open(fwrite, "w")
+	for x in range(0, len(lists_to_sort)):
+		
+		sorted_list = merge_sort(lists_to_sort[x])
+		
+		for item in sorted_list:
+			f.write("%s " % str(item))
+		f.write("\r\n")
 	
 main()

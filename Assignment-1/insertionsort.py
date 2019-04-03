@@ -63,7 +63,7 @@ def sort_everything(content, fwrite):
 		
 		for item in sorted_list:
 			f.write("%s " % str(item))
-		f.write("\n")
+		f.write("\r\n")
 		
 		print("\n")
 	f.close()
