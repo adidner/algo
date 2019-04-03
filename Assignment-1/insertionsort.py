@@ -1,42 +1,39 @@
 import re
 
-
+#this function runs and insertion sort on the data,
+#
 def sort(list):
-	for x in range(0,len(list)):
-		#print(list)
-		for i in range(x,-1,-1):
-			#if I am the first element
+	for x in range(0,len(list)):#through all element
+		for i in range(x,-1,-1): #backwards through sorted elements
+			
+			#if I am the first element, I'm arbitrarily sorted
 			if x == 0:
-				#print("first")
 				continue
-			#if I am greater than the left element
+				
+			#if I am greater than the left element, I'm arbitrarily sorted
 			if list[x] >= list[x-1]:
-				#print("greater than left: "+ str(list[x]) + ", "+ str(list[x-1]))
 				continue
-			#if There is no left element
+				
+			#if There is no left element, I belong at the head of the list
 			if i == 0:
-				#print("i of 0")
-				#print(list)
 				temp=list[x]
 				del list[x]
 				list.insert(0,temp)
 				continue
 				
 			
-			#if I am between 2 elements
+			#if I am between 2 elements, I belong in between
 			if i-1 >= 0:
 				if list[i-1] < list[x] and list[x] <= list[i]:
-						#print("in 2 between")
-						#print(list)
 						temp = list[x]
 						del list[x]
 						list.insert(i,temp)
 						continue
-						
-						
 	return list
 
 
+#this function reads data from a file
+#the file is assumed to be named data.txt with space seperated integers
 def read_from_file(content, fname):
 	with open(fname) as f:
 		content = f.readlines()
@@ -47,14 +44,15 @@ def read_from_file(content, fname):
 		
 	return content
 	
-	
+
+#this function loops through a list sorting every sub-list located an each indice
+#this function then writes the sorted data to a file called insert.txt
 def sort_everything(content, fwrite):
 	f = open(fwrite, "w")
 	
 	
 	for x in range(0,len(content)):	
 	
-		#print(content[x])
 		current = content[x].split()
 		current = list(map(int, current))
 		sorted_list = sort(current)
