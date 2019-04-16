@@ -1,0 +1,84 @@
+4     (Number of test cases in this file)
+
+2     (Number of items in this test case) 
+77 7  (Price, Weight)
+66 6  (Price, Weight)
+
+2     (Family Members)
+5     (Carrying Capacity)
+5     (Carrying Capacity)
+
+
+6     (Number of items in this test case)
+32 16 (Price, Weight)
+43 12 (Price, Weight)
+26 4  (Price, Weight)
+50 8  (Price, Weight)
+20 3  (Price, Weight)
+27 9  (Price, Weight)
+
+4     (Family Members)
+25    (Carrying Capacity)
+23    (Carrying Capacity)
+21    (Carrying Capacity)
+19    (Carrying Capacity)
+
+5
+1 1
+2 1
+3 1
+2 2
+5 5
+10
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+10
+1 1
+4 3
+4 3
+4 4
+5 4
+8 6
+10 7
+9 7
+11 8
+13 9
+30
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
