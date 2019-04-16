@@ -1,12 +1,12 @@
 import re
 
-global_test_cases = []
+
 
 class item:
-	def __init__(self, price, weight):
+	def __init__(self, price, weight, index):
 		self.price = price
 		self.weight = weight
-		self.index = -1
+		self.index = index
 
 class family_member:
 	def __init__(self, weight_capacity):
@@ -29,7 +29,7 @@ def ReadTestData(fname):
 	#print(content)
 	return content
 	
-def FilterIntoClasses(content):
+def FilterIntoClasses(content, global_test_cases):
 	current_line = 1
 	number_test_cases = content[0]
 	#test cases
@@ -41,7 +41,7 @@ def FilterIntoClasses(content):
 		for i in range(0, int(content[current_line])):
 			current_line+=1
 			minilist = content[current_line].split()
-			item_var = item(int(minilist[0]), int(minilist[1]))
+			item_var = item(int(minilist[0]), int(minilist[1]), i)
 			list_item.append(item_var)
 			
 		current_line+=1
@@ -54,13 +54,16 @@ def FilterIntoClasses(content):
 		current_line+=1
 			
 		global_test_cases.append((list_item, list_fam))
+		
+	return global_test_cases
 
-def print_filtered_data():
+def print_filtered_data(global_test_cases):
 	for list_item, list_fam in global_test_cases:
 		print("LIST ITEMS")
 		for i in list_item:
 			print("price: "+str(i.price))
 			print("weight: "+str(i.weight))
+			print("index: "+str(i.index))
 		print("LIST FAM")
 		for j in list_fam:
 			print("weight Cap: "+str(j.weight_capacity))
@@ -69,24 +72,40 @@ def print_filtered_data():
 		
 		
 		
-#def napsack(item_array, family_array):
+def run_napsack(global_test_cases):
+	for list_item, list_fam in global_test_cases:
+		for current_fam in list_fam:
+			napsack(current_fam, current_fam.weight_capacity, list_item)
 
-
-
+def napsack(current_fam, weight_capacity, list_items, current_size):
+	if len(list_items) == 0 or weight_capacity == 0:
+		return 
+	
+	
+	#run recursive part of napsack and put the values back into the index
+	#tracking part of the class
+	
+	
+	#if list_items[n-1].weight > weight_capacity:
+	#	return napsack(current_fam, weight_capacity,list_items, n-1)
+	#else:
+	#	return max(list_items[n-1] + napsack(current_fam, weight_capacity - list_items[n-1], weight_capacity, list_items, n-1), napsack(current_fam, weight_capacity,list_items, n-1))
+	
+	
 #def prettyprint():	
 
 
 def main():
 	fname = "shopping.txt"
+	global_test_cases = []
 	
 	#run the section that gets all the data from the files
 	content = ReadTestData(fname)
-	FilterIntoClasses(content)
+	global_test_cases = FilterIntoClasses(content, global_test_cases)
 	
-	#print_filtered_data()
+	print_filtered_data(global_test_cases)
 	
-	#for loop through every test case:
-		#run the section that does napsack on each person
+	run_napsack(global_test_cases)
 	
 
 
