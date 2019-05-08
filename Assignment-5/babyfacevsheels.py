@@ -1,5 +1,5 @@
 import re
-
+import sys
 
 good = "babyface"
 bad = "heel"
@@ -8,9 +8,8 @@ bad = "heel"
 class node:
 	def __init__(self, name):
 		self.name = name
-		self.type = ""
+		self.type = ''
 		self.neighbors = []
-		self.color = 'white'
 	
 	def add_neighbor(self, node):
 		if node not in self.neighbors:
@@ -43,18 +42,19 @@ class Graph:
 	
 	def print_graph(self):
 		for key in sorted(list(self.nodes.keys())):
-			print(key + str(self.nodes[key].neighbors))
+			print(key +": " +self.nodes[key].type +"    " + str(self.nodes[key].neighbors))
 		
 	def print_result(self):
+		print("Yes Possible")
 		print("Babyfaces: ", end="")
 		for key in sorted(list(self.nodes.keys())):
 			if self.nodes[key].type == good:
-				print(key + str(self.nodes[key].neighbors),end="")
+				print(key + " ",end="")
 		print("")
 		print("Heels: ", end="")
 		for key in sorted(list(self.nodes.keys())):
 			if self.nodes[key].type == bad:
-				print(key + str(self.nodes[key].neighbors), end="")
+				print(key+ " ", end="")
 		print("")
 
 #the function used to read in test data from a file
@@ -83,7 +83,7 @@ def FilterIntoClasses(content):
 		#print("minilist: ",end="")
 		#print(minilist)
 		main_graph.add_edge(minilist[0], minilist[1])
-	main_graph.print_graph()
+	#main_graph.print_graph()
 	return main_graph
 	
 	
@@ -91,20 +91,31 @@ def modified_bfs(main_graph, root):
 	currenttype = good
 	queue = []
 	queue.append(root)
+	root.type = currenttype
+	currenttype=oppositeofcurrenttype(currenttype)
 	
 	while len(queue) != 0:
+		
 		current = queue.pop()
+		main_graph.print_graph()
+		print()
 		for i in current.neighbors:
 			current_node=main_graph.nodes[i]
+			print()
+			print("current_node_name: "+current_node.name)
+			print("current_node_type: "+current_node.type)
+			print("current_type: "+currenttype)
+			print()
 			if current_node.type=='':
 				current_node.type = currenttype
+				#print("appending name: "+current_node.name)
 				queue.append(current_node)
-			elif current_node.type==currenttype:
+			elif current_node.type!=currenttype:
 				impossible()
-				return
-		flipcurrenttype(currenttype)
+				sys.exit()
+		currenttype=oppositeofcurrenttype(currenttype)
 		
-	main_graph.print_result()
+	return main_graph
 	
 	
 	
@@ -121,13 +132,13 @@ def oppositeofcurrenttype(currenttype):
 	elif currenttype==bad:
 		return good
 	
-def flipcurrenttype(currenttype):
-	if currenttype==good:
-		currenttype==bad
-	elif currenttype==bad:
-		currenttype==good
-	
 
+	
+def checkforunexplored(main_graph):
+	for key in sorted(list(main_graph.nodes.keys())):
+		if main_graph.nodes[key].type == "":
+			return main_graph.nodes[key]
+	return False
 
 def main():
 	
@@ -141,9 +152,12 @@ def main():
 
 	root=main_graph.nodes[str(content[1])]
 	
+	main_graph = modified_bfs(main_graph,root)
 	
-	modified_bfs(main_graph,root)
-
+	while checkforunexplored(main_graph) != False:
+		newroot=checkforunexplored(main_graph)
+		modified_bfs(main_graph,newroot)
+	main_graph.print_result()
 
 
 main()
