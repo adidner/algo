@@ -1,3 +1,5 @@
+import re
+
 
 good = "babyface"
 bad = "heel"
@@ -11,7 +13,7 @@ class node:
 	
 	def add_neighbor(self, node):
 		if node not in self.neighbors:
-			self.neightbors.append(node)
+			self.neighbors.append(node)
 			self.neighbors.sort()
 
 
@@ -33,7 +35,16 @@ class Graph:
 		else:
 			return False
 	
+	def get_node(self, name):
+		for key in sorted(list(self.nodes.keys())):
+			if key == name:
+				return key
+	
 	def print_graph(self):
+		for key in sorted(list(self.nodes.keys())):
+			print(key + str(self.nodes[key].neighbors))
+		
+	def print_result(self):
 		print("Babyfaces: ", end="")
 		for key in sorted(list(self.nodes.keys())):
 			if self.nodes[key].type == good:
@@ -59,15 +70,32 @@ def ReadTestData(fname):
 
 #function used to get the data from array format into events and global test cases
 def FilterIntoClasses(content):
+	main_graph = Graph()
+	size=int(content[0])
+	for i in range(1, size):
+		new_node = node(str(content[i]))
+		main_graph.add_node(new_node)
 	
-
+	
+	#print(size)
+	#print(int(content[size+1]))
+	for i in range(1, int(content[size+1])+1):
+		minilist = content[i+size+1].split()
+		#print(minilist)
+		#main_graph.add_edge(main_graph.get_node(minilist[0]), main_graph.get_node(minilist[1]))
+		main_graph.add_edge(minilist[0], minilist[1])
+	main_graph.print_graph()
+	return main_graph
 
 def main():
-	fname = input("Specify the name of the file to read data from: ")
-
+	
+	
+	#fname = input("Specify the name of the file to read data from: ")
+	fname = "wrestler2.txt"
+	
 	content = ReadTestData(fname)
-
-
+	
+	FilterIntoClasses(content)
 
 
 
