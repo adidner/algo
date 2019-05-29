@@ -1,1 +1,2 @@
 run python3 binpack.py
+this assumes there is a file called "bin.txt" with the style in the description

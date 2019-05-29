@@ -1,13 +1,9 @@
 import re
 import sys
 import time
+import random
 
 #Next to do
-#make sure the 3 functions are working correctly
-#add the timing stuff for them
-#do the pretty printing stuff for it
-
-
 #make the create random bin packing scenarios part
 #enter the 20 cases into excel and make charts/graph
 
@@ -27,33 +23,6 @@ class test_case:
 		print("bin_capacity: ", end="")
 		print(self.bin_capacity)
 
-
-def ReadTestData(fname):
-	content = []
-	with open(fname) as f:
-		content = f.readlines()
-		
-	for x in range(0,len(content)):
-		content[x] = re.sub('\r','',content[x])
-		content[x] = re.sub('\n','',content[x])
-	
-	return content
-
-
-
-#function used to get the data from array format into events and global test cases
-def FilterIntoClasses(content):
-	list_of_test_cases = []
-	del content[0]
-	i=0
-	while i < len(content)-3: #loop the number of times we have test cases
-		list_items=content[i+2].split()
-		list_items = list(map(int, list_items))
-		current_test_case = test_case(list_items, int(content[i]))
-		#current_test_case.printself()
-		list_of_test_cases.append(current_test_case)
-		i+=3
-	return list_of_test_cases
 
 
 def First_Fit(test_case):
@@ -76,6 +45,7 @@ def First_Fit(test_case):
 			placed = False
 	#print("First Fit: ", end="")
 	#print(bins)
+	return len(bins)
 	
 def First_Fit_Dec(test_case):
 	bins = []
@@ -102,7 +72,7 @@ def First_Fit_Dec(test_case):
 			placed = False
 	#print("First Fit Dec: ", end="")
 	#print(bins)
-
+	return len(bins)
 
 def Best_Fit(test_case):
 	bins = []
@@ -128,55 +98,87 @@ def Best_Fit(test_case):
 		elif placed == True:
 			bins[current_index]+=current_item
 			placed = False
+	return len(bins)		
+	
 	#print("Best Fit: ", end="")
 	#print(bins)
 	
 	
-
-
+def createtestcases():
+	list_of_test_cases = []
+	for x in range(0, 25):
+		bin_capacity = random.randint(1,101)
+		number_items = random.randint(1,101)
+		list_items = []
+		for i in range(0,number_items):
+			item_weight = random.randint(1,bin_capacity)
+			list_items.append(item_weight)
+		newtest = test_case(list_items, bin_capacity)
+		list_of_test_cases.append(newtest)
+	return list_of_test_cases
+	
 
 def main():
 	
 	fname = "bin.txt"
 	content = []
 	list_of_test_cases = []
+	multiply_constant = 1000000
 	
 	#Reading in all test cases from files
-	content = ReadTestData(fname)
-	list_of_test_cases = FilterIntoClasses(content)	
+	list_of_test_cases = createtestcases()	
 	
-	for i in range(0,len(list_of_test_cases)):
-		print("Test Case " + str(i+1)+" ", end="")
+	for i in range(0,len(list_of_test_cases)):		
 		
-		multiply_constant = 1000000
 		
 		#run First-fit
 		start = time.time()
-		First_Fit(list_of_test_cases[i])
+		bin_len = First_Fit(list_of_test_cases[i])
 		end = time.time()
 		final=end-start
 		final = final * multiply_constant
 		final = round(final, 2)
-		print("First Fit: "+str(final)+", time. ", end="")
-		
+		print("First Fit: "+ str(i))
+		print("Time: "+str(final))
+		print("Bins: "+ str(bin_len))
+		print()
+	
+	print()
+	print()
+	
+	for i in range(0,len(list_of_test_cases)):
 		
 		#run First-fit decreasing
 		start = time.time()
-		First_Fit_Dec(list_of_test_cases[i])
+		bin_len =First_Fit_Dec(list_of_test_cases[i])
 		end = time.time()
 		final=end-start
 		final = final * multiply_constant
 		final = round(final, 2)
-		print("First Fit Decreasing: "+str(final)+", time. ", end="")
-		
+		print("First Fit Decreasing: "+ str(i))
+		print("Time: "+str(final))
+		print("Bins: "+ str(bin_len))
+		print()
+	
+	print()
+	print()
+	
+	for i in range(0,len(list_of_test_cases)):
 		
 		#run Best-fit
 		start = time.time()
-		Best_Fit(list_of_test_cases[i])
+		bin_len =Best_Fit(list_of_test_cases[i])
 		end = time.time()
 		final=end-start
 		final = final * multiply_constant
 		final = round(final, 2)
-		print("Best Fit: "+str(final)+", time. ", end="")
+		print("Best Fit: "+ str(i))
+		print("Time: "+str(final))
+		print("Bins: "+ str(bin_len))
 		print()
+		print()
+	
+	print()
+	print()
+	
 main()
