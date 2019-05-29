@@ -66,7 +66,7 @@ def First_Fit(test_case):
 		#print(bins)
 		current_item=copy_list_items.pop()
 		for i in range(0, len(bins)):
-			if current_item + bins[i] < test_case.bin_capacity:
+			if current_item + bins[i] <= test_case.bin_capacity:
 				bins[i] += current_item
 				placed = True
 				break
@@ -74,6 +74,7 @@ def First_Fit(test_case):
 			bins.append(current_item)
 		elif placed == True:
 			placed = False
+	print("First Fit: ", end="")
 	print(bins)
 	
 def First_Fit_Dec(test_case):
@@ -81,14 +82,17 @@ def First_Fit_Dec(test_case):
 	
 	copy_list_items = test_case.list_items.copy()
 	copy_list_items.sort()
+	#print("List, Reversed: ", end="")
+	#print(copy_list_items)
 	current_item=copy_list_items.pop()
 	
 	bins.append(current_item)
 	placed = False
 	while len(copy_list_items)>0:
+		#print(bins)
 		current_item=copy_list_items.pop()
 		for i in range(0, len(bins)):
-			if current_item + bins[i] < test_case.bin_capacity:
+			if current_item + bins[i] <= test_case.bin_capacity:
 				bins[i] += current_item
 				placed = True
 				break
@@ -96,30 +100,35 @@ def First_Fit_Dec(test_case):
 			bins.append(current_item)
 		elif placed == True:
 			placed = False
+	print("First Fit Dec: ", end="")
 	print(bins)
 
 
 def Best_Fit(test_case):
 	bins = []
 	copy_list_items = test_case.list_items.copy()
-	current_item=copy_list_items.pop()
+	current_item = copy_list_items.pop()
 	bins.append(current_item)
 	placed = False
 	while len(copy_list_items)>0:
+		#print(bins)
 		current_item=copy_list_items.pop()
 		left_over_space = 1000000
 		current_index = -1
 		for i in range(0, len(bins)):
-			if current_item + bins[i] < test_case.bin_capacity and test_case.bin_capacity - (current_item + bins[i])< left_over_space :
-				#bins[i] += current_item
+			if current_item + bins[i] <= test_case.bin_capacity and test_case.bin_capacity - (current_item + bins[i]) < left_over_space :
+				
 				current_index = i
 				left_over_space = test_case.bin_capacity - (current_item + bins[i])
 				placed = True
+				#print("Current index: "+str(current_index))
+				#print("Left Over Space: "+str(left_over_space))
 		if placed == False:
 			bins.append(current_item)
 		elif placed == True:
-			bins[i]+=current_item
+			bins[current_index]+=current_item
 			placed = False
+	print("Best Fit: ", end="")
 	print(bins)
 
 
