@@ -1,0 +1,113 @@
+min x1+x2+x3+x4+x5+x6
+	 
+ST
+	a1+a2+a3+a4+a5+a6 = 1
+	b1+b2+b3+b4+b5+b6 = 1
+	c1+c2+c3+c4+c5+c6 = 1
+	d1+d2+d3+d4+d5+d6 = 1
+	e1+e2+e3+e4+e5+e6 = 1
+	f1+f2+f3+f4+f5+f6 = 1
+	
+	4a1+4b1+4c1+6d1+6e1+6f1 - 10x1 <= 0
+	4a2+4b2+4c2+6d2+6e2+6f2 - 10x2 <= 0
+	4a3+4b3+4c3+6d3+6e3+6f3 - 10x3 <= 0
+	4a4+4b4+4c4+6d4+6e4+6f4 - 10x4 <= 0
+	4a5+4b5+4c5+6d5+6e5+6f5 - 10x5 <= 0
+	4a6+4b6+4c6+6d6+6e6+6f6 - 10x6 <= 0
+	
+	
+END
+	INT x1
+	INT x2
+	INT x3
+	INT x4
+	INT x5
+	INT x6
+	INT a1
+	INT a2
+	INT a3
+	INT a4
+	INT a5
+	INT a6
+	INT b1
+	INT b2
+	INT b3
+	INT b4
+	INT b5
+	INT b6
+	INT c1
+	INT c2
+	INT c3
+	INT c4
+	INT c5
+	INT c6
+	INT d1
+	INT d2
+	INT d3
+	INT d4
+	INT d5
+	INt d6
+	INT e1
+	INT e2
+	INT e3
+	INT e4
+	INT e5
+	INT e6
+	INT f1
+	INT f2
+	INT f3
+	INT f4
+	INT f5
+	INT f6
+
+
+
+
+min x1+x2+x3+x4+x5
+	
+
+ST
+	a1+a2+a3+a4+a5 = 1
+	b1+b2+b3+b4+b5 = 1
+	c1+c2+c3+c4+c5 = 1
+	d1+d2+d3+d4+d5 = 1
+	e1+e2+e3+e4+e5 = 1
+
+	x1+x2+x3+x4+x5 >= 1
+	
+	20a1+10b1+15c1+10d1+5e1-20x1 <= 0
+	20a2+10b2+15c2+10d2+5e2-20x2 <= 0
+	20a3+10b3+15c3+10d3+5e3-20x3 <= 0
+	20a4+10b4+15c4+10d4+5e4-20x4 <= 0
+	20a5+10b5+15c5+10d5+5e5-20x5 <= 0
+END
+	INT x1
+	INT x2
+	INT x3
+	INT x4
+	INT x5
+	INT a1
+	INT a2
+	INT a3
+	INT a4
+	INT a5
+	INT b1
+	INT b2
+	INT b3
+	INT b4
+	INT b5
+	INT c1
+	INT c2
+	INT c3
+	INT c4
+	INT c5
+	INT d1
+	INT d2
+	INT d3
+	INT d4
+	INT d5
+	INT e1
+	INT e2
+	INT e3
+	INT e4
+	INT e5

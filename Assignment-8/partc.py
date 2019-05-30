@@ -107,8 +107,8 @@ def Best_Fit(test_case):
 def createtestcases():
 	list_of_test_cases = []
 	for x in range(0, 25):
-		bin_capacity = random.randint(1,101)
-		number_items = random.randint(1,101)
+		bin_capacity = random.randint(1,1001)
+		number_items = random.randint(1,1001)
 		list_items = []
 		for i in range(0,number_items):
 			item_weight = random.randint(1,bin_capacity)
@@ -138,7 +138,9 @@ def main():
 		final=end-start
 		final = final * multiply_constant
 		final = round(final, 2)
+		
 		print("First Fit: "+ str(i))
+		print("Num Items: "+str(len(list_of_test_cases[i].list_items)))
 		print("Time: "+str(final))
 		print("Bins: "+ str(bin_len))
 		print()
@@ -156,6 +158,7 @@ def main():
 		final = final * multiply_constant
 		final = round(final, 2)
 		print("First Fit Decreasing: "+ str(i))
+		print("Num Items: "+str(len(list_of_test_cases[i].list_items)))
 		print("Time: "+str(final))
 		print("Bins: "+ str(bin_len))
 		print()
@@ -173,6 +176,7 @@ def main():
 		final = final * multiply_constant
 		final = round(final, 2)
 		print("Best Fit: "+ str(i))
+		print("Num Items: "+str(len(list_of_test_cases[i].list_items)))
 		print("Time: "+str(final))
 		print("Bins: "+ str(bin_len))
 		print()
